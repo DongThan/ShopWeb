@@ -9,6 +9,6 @@ package Entity;
  *
  * @author ASUS
  */
-public class User {
+public class Discountproduct {
     
 }

@@ -9,6 +9,6 @@ package DAO;
  *
  * @author ASUS
  */
-public class UserDAO {
+public class AccountDAO {
     
 }
