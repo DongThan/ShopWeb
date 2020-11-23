@@ -121,15 +121,15 @@
             pages =(int)Integer.parseInt(request.getParameter("pages"));
         }
         
-        if(total <=4)
+        if(total <=12)
         {
             first=0;
             last=total;
         }
         else
         {
-            first=(pages -1)*4;
-            last=4;
+            first=(pages -1)*12;
+            last=12;
         }
         try{
             List<Product> prd = prdDAO.getAllproduct();
