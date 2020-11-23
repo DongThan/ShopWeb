@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Controller;
+import DAO.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;

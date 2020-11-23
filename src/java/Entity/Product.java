@@ -17,11 +17,21 @@ public class Product {
     private int quantity;
     private int categoryID;
     private String picture;
+    private String dateAdded;
 
     public Product() {
     }
 
     public Product(String productName, String productDescription, int price, int quantity, String picture) {
+        this.productName = productName;
+        this.productDescription = productDescription;
+        this.price = price;
+        this.quantity = quantity;
+        this.picture = picture;
+    }
+    
+    public Product(int productID, String productName, String productDescription, int price, int quantity, String picture) {
+        this.productID = productID;
         this.productName = productName;
         this.productDescription = productDescription;
         this.price = price;
@@ -39,6 +49,16 @@ public class Product {
         this.picture = picture;
     }
 
+    public Product(int productID, String productName, String productDescription, int price, int quantity, int categoryID, String picture,String dateAdded) {
+        this.productID = productID;
+        this.productName = productName;
+        this.productDescription = productDescription;
+        this.price = price;
+        this.quantity = quantity;
+        this.categoryID = categoryID;
+        this.picture = picture;
+        this.dateAdded=dateAdded;
+    }
     public int getProductID() {
         return productID;
     }
@@ -97,7 +117,8 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" + "productID=" + productID + ", productName=" + productName + ", productDescription=" + productDescription + ", price=" + price + ", quantity=" + quantity + ", categoryID=" + categoryID + ", picture=" + picture + '}';
+        return "Product{" + "productID=" + productID + ", productName=" + productName + ", productDescription=" + productDescription + ", price=" + price + ", quantity=" + quantity + ", "
+                + "categoryID=" + categoryID + ", picture=" + picture + ", date=" + dateAdded + '}';
     }
     
     

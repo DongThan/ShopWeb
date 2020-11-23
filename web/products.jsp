@@ -5,15 +5,78 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="DAO.*" %>
+<%@page import="Entity.*" %>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.SQLException" %>
+<%@page import="java.util.ArrayList" %>
+<%@page import="java.util.List" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All products - TEAM16 Store</title>
-    <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="jquery.twbsPagination.js" type="text/javascript"></script>
+    <%
+    ProductDAO prdDAO=new ProductDAO();
+    int total = prdDAO.getCountProduct();
+    %>
+    
+    <script type="text/javascript">
+        $(document).ready(function(){
+            
+            var pageSize = 12;// 12 product in page
+            showPage = function(page){
+                $(".col-4.contentProduct").hide();
+                $(".col-4.contentProduct").each(function(n) {
+				if (n >= pageSize * (page - 1) && n < pageSize * page)
+					$(this).show();
+			});
+            }
+            showPage(1);
+            var totalRows =77;//total product
+            var btnPage=5;// Số nút bấm
+            var iTotalPages = Math.ceil(totalRows/pageSize);
+            
+            var obj = $('#pagination').twbsPagination({
+                totalPages: iTotalPages,
+                visiblePages: btnPage,
+                onPageClick: function (event, page) {
+				/* console.info(page); */
+				showPage(page);
+			}
+            });
+        });
+    </script>
+    <style>
+        #pagination {
+		display: flex;
+		display: -webkit-flex; /* Safari 8 */
+		flex-wrap: wrap;
+		-webkit-flex-wrap: wrap; /* Safari 8 */
+		justify-content: center;
+		-webkit-justify-content: center;
+	}
+	#pagination a{
+            position: relative;
+            float: left;
+            padding: .5rem .75rem;
+            margin-left: -1px;
+            color: #0275d8;
+            text-decoration: none;
+            background-color: #fff;
+            border: 1px solid #ddd;
+	}
+    </style>
+    <link href="css/style.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <div class="container">
@@ -49,198 +112,103 @@
                 <option value="">Short by sale</option>
             </select>
         </div>
-        <div class="row">
-            <div class="col-4">
-                <img src="images/prd4.jpg" alt="">
-                <div class="overlay">
-                    <input type="button" value="Thêm vào giỏ hàng" class="btn">
-                </div>
-                <h4>Thuốc A</h4>
-                <div class="rating">
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star-o" ></i>
-                </div>
-                <p>$50.00</p>
+        
+        <%
+        
+        int first =0, last=0,pages=1;
+        if(request.getParameter("pages")!=null)
+        {
+            pages =(int)Integer.parseInt(request.getParameter("pages"));
+        }
+        
+        if(total <=4)
+        {
+            first=0;
+            last=total;
+        }
+        else
+        {
+            first=(pages -1)*4;
+            last=4;
+        }
+        try{
+            List<Product> prd = prdDAO.getAllproduct();
+            for (int i=0;i<prd.size();i++) {%>
+            <div class="row">
+                <% if(i<prd.size()) {%>
+                <div class="col-4 contentProduct">
+                    <img src="images/prd4.jpg" alt="">
+                    <div class="overlay">
+                        <input type="button" value="Thêm vào giỏ hàng" class="btn">
+                    </div>
+                    <h4><%= prd.get(i).getProductName() %></h4>
+                    <div class="rating">
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star-o" ></i>
+                    </div>
+                    <p><%= prd.get(i).getPrice() %></p>
+                </div> <% } i++;%> 
+                <% if(i<prd.size()) {%>
+                <div class="col-4 contentProduct">
+                    <img src="images/prd4.jpg" alt="">
+                    <div class="overlay">
+                        <input type="button" value="Thêm vào giỏ hàng" class="btn">
+                    </div>
+                    <h4><%= prd.get(i).getProductName() %></h4>
+                    <div class="rating">
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star-o" ></i>
+                    </div>
+                    <p><%= prd.get(i).getPrice() %></p>
+                </div> <% } i++;%>  
+                <% if(i<prd.size()) {%>
+                <div class="col-4 contentProduct">
+                    <img src="images/prd4.jpg" alt="">
+                    <div class="overlay">
+                        <input type="button" value="Thêm vào giỏ hàng" class="btn">
+                    </div>
+                    <h4><%= prd.get(i).getProductName() %></h4>
+                    <div class="rating">
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star-o" ></i>
+                    </div>
+                    <p><%= prd.get(i).getPrice() %></p>
+                </div> <% } i++;%>  
+                <% if(i<prd.size()) {%>
+                <div class="col-4 contentProduct">
+                    <img src="images/prd4.jpg" alt="">
+                    <div class="overlay">
+                        <input type="button" value="Thêm vào giỏ hàng" class="btn">
+                    </div>
+                    <h4><%= prd.get(i).getProductName() %></h4>
+                    <div class="rating">
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star" ></i>
+                        <i class="fa fa-star-o" ></i>
+                    </div>
+                    <p><%= prd.get(i).getPrice() %></p>
+                </div> <% } %>  
             </div>
-            <div class="col-4">
-                <img src="images/prd5.jpg" alt="">
-                <div class="overlay">
-                    <input type="button" value="Thêm vào giỏ hàng" class="btn">
-                </div>
-                <h4>Thuốc A</h4>
-                <div class="rating">
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star-o" ></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-            <div class="col-4">
-                <img src="images/prd6.jpg" alt="">
-                <div class="overlay">
-                    <input type="button" value="Thêm vào giỏ hàng" class="btn">
-                </div>
-                <h4>Thuốc A</h4>
-                <div class="rating">
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star-o" ></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-            <div class="col-4">
-                <img src="images/prd7.jpg" alt="">
-                <div class="overlay">
-                    <input type="button" value="Thêm vào giỏ hàng" class="btn">
-                </div>
-                <h4>Thuốc A</h4>
-                <div class="rating">
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star-half-o" ></i>
-                    <i class="fa fa-star-o" ></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-4">
-                <img src="images/prd4.jpg" alt="">
-                <div class="overlay">
-                    <input type="button" value="Thêm vào giỏ hàng" class="btn">
-                </div>
-                <h4>Thuốc A</h4>
-                <div class="rating">
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star-o" ></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-            <div class="col-4">
-                <img src="images/prd5.jpg" alt="">
-                <div class="overlay">
-                    <input type="button" value="Thêm vào giỏ hàng" class="btn">
-                </div>
-                <h4>Thuốc A</h4>
-                <div class="rating">
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star-o" ></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-            <div class="col-4">
-                <img src="images/prd6.jpg" alt="">
-                <div class="overlay">
-                    <input type="button" value="Thêm vào giỏ hàng" class="btn">
-                </div>
-                <h4>Thuốc A</h4>
-                <div class="rating">
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star-o" ></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-            <div class="col-4">
-                <img src="images/prd7.jpg" alt="">
-                <div class="overlay">
-                    <input type="button" value="Thêm vào giỏ hàng" class="btn">
-                </div>
-                <h4>Thuốc A</h4>
-                <div class="rating">
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star-half-o" ></i>
-                    <i class="fa fa-star-o" ></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-4">
-                <img src="images/prd4.jpg" alt="">
-                <div class="overlay">
-                    <input type="button" value="Thêm vào giỏ hàng" class="btn">
-                </div>
-                <h4>Thuốc A</h4>
-                <div class="rating">
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star-o" ></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-            <div class="col-4">
-                <img src="images/prd5.jpg" alt="">
-                <div class="overlay">
-                    <input type="button" value="Thêm vào giỏ hàng" class="btn">
-                </div>
-                <h4>Thuốc A</h4>
-                <div class="rating">
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star-o" ></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-            <div class="col-4">
-                <img src="images/prd6.jpg" alt="">
-                <div class="overlay">
-                    <input type="button" value="Thêm vào giỏ hàng" class="btn">
-                </div>
-                <h4>Thuốc A</h4>
-                <div class="rating">
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star-o" ></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-            <div class="col-4">
-                <img src="images/prd7.jpg" alt="">
-                <div class="overlay">
-                    <input type="button" value="Thêm vào giỏ hàng" class="btn">
-                </div>
-                <h4>Thuốc A</h4>
-                <div class="rating">
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star" ></i>
-                    <i class="fa fa-star-half-o" ></i>
-                    <i class="fa fa-star-o" ></i>
-                </div>
-                <p>$50.00</p>
-            </div>
-        </div>
+        <% }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        %>
         <div class="page-btn">
-            <span>1</span>
-            <span>2</span>
-            <span>3</span>
-            <span>4</span>
-            <span>&#10132;</span>
+            <ul id="pagination"></ul> <!-- Hiển thị nút chuyển trang -->
         </div>
     </div>
     <!--------- footer  --------->

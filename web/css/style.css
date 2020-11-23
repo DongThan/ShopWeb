@@ -340,6 +340,24 @@ select:focus{
 button:hover{
     opacity: 0.5;
 }
+#pagination {
+    display: flex;
+    display: -webkit-flex; /* Safari 8 */
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap; /* Safari 8 */
+    justify-content: center;
+    -webkit-justify-content: center;
+}
+.page-link {
+    position: relative;
+    float: left;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    color: #0275d8;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
 /*--------- single product details ------------*/
 .single-product{
     margin-top: 20px;
