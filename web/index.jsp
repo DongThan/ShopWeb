@@ -19,7 +19,7 @@
         <div class="container">
             <div class="navbar">
                 <div class="gogo">
-                    <img src="images/logo.png" width="125px" alt="">
+                    <img src="images/logo-default.jpg" width="125px" alt=""/>
                 </div>
                 <nav>
                     <ul id="MenuItems">
@@ -361,7 +361,7 @@
                     </div>
                 </div>
                 <div class="footer-col-2">
-                    <img src="images/logo4.png" alt="">
+                    <img src="images/logo-default-2.jpg" alt=""/>
                     <p>Our Purpose Is To Sustainably Make the Pleasure and
                         Benefits of Sports Accessible to the Many
                     </p>
