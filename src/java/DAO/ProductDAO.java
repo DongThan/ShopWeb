@@ -40,7 +40,7 @@ public class ProductDAO {
             prestatement = con.prepareStatement("SELECT * FROM product");
             rs= prestatement.executeQuery();
             while (rs.next())
-            {
+            {   
                 int id=rs.getInt("ProductID");
                 String name=rs.getString("ProductName");
                 String des=rs.getString("ProductDescription");

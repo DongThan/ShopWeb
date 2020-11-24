@@ -5,6 +5,16 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="DAO.*" %>
+<%@page import="Entity.*" %>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.SQLException" %>
+<%@page import="java.util.ArrayList" %>
+<%@page import="java.util.List" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +24,8 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/cart.js" type="text/javascript"></script>
 </head>
 <body>
     <div class="container">
@@ -36,9 +48,12 @@
                 <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
         </div>
     </div>
+    <script>
+        updateCart();
+    </script>
     <!------- cart item ------>
     <div class="small-container cart-page">
-        <table>
+        <table class='tbl-cart-item'>
             <tr>
                 <th>Product</th>
                 <th>Quantity</th>
@@ -171,7 +186,9 @@
         function menutoggle(){
             if(MenuItems.style.maxHeight=="0px")
             {
-                MenuItems.style.maxHeight="250px"
+                MenuItems.style.maxHeight="250px";
+                MenuItems.style.zIndex = "800"
+                
             }
             else
             {

@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="js/jquery.twbsPagination.js" type="text/javascript"></script>
+    <script src="js/cart.js" type="text/javascript"></script>
     <%
     ProductDAO prdDAO=new ProductDAO();
     int total = prdDAO.getCountProduct();
@@ -95,8 +96,8 @@
                         <li><a href="" class="btn-register">Register</a></li>
                     </ul>
                 </nav>
-                <a href="cart.jsp"><img src="images/cart.png" width="30px" height="30px" class="imgcard"></a>
-                <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
+            <a href="cart.jsp" ><img src="images/cart.png" width="30px" height="30px" class="imgcard"><span class="cart-item" >(0)</span></a>
+            <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
             </div>
     </div>
 
@@ -139,7 +140,7 @@
                 <div class="col-4 contentProduct">
                     <img src="images/prd4.jpg" alt="">
                     <div class="overlay">
-                        <input type="button" value="Thêm vào giỏ hàng" class="btn">
+                        <input type="button" value="Thêm vào giỏ hàng" onclick="add_to_cart(<%= prd.get(i).getProductID() %>,'<%= prd.get(i).getProductName() %>',<%= prd.get(i).getPrice() %>)" class="btn">
                     </div>
                     <h4><%= prd.get(i).getProductName() %></h4>
                     <div class="rating">
@@ -155,7 +156,7 @@
                 <div class="col-4 contentProduct">
                     <img src="images/prd4.jpg" alt="">
                     <div class="overlay">
-                        <input type="button" value="Thêm vào giỏ hàng" class="btn">
+                        <input type="button" value="Thêm vào giỏ hàng" onclick="add_to_cart(<%= prd.get(i).getProductID() %>,'<%= prd.get(i).getProductName() %>',<%= prd.get(i).getPrice() %>)" class="btn">
                     </div>
                     <h4><%= prd.get(i).getProductName() %></h4>
                     <div class="rating">
@@ -171,7 +172,7 @@
                 <div class="col-4 contentProduct">
                     <img src="images/prd4.jpg" alt="">
                     <div class="overlay">
-                        <input type="button" value="Thêm vào giỏ hàng" class="btn">
+                        <input type="button" value="Thêm vào giỏ hàng" onclick="add_to_cart(<%= prd.get(i).getProductID() %>,'<%= prd.get(i).getProductName() %>',<%= prd.get(i).getPrice() %>)" class="btn">
                     </div>
                     <h4><%= prd.get(i).getProductName() %></h4>
                     <div class="rating">
@@ -187,7 +188,7 @@
                 <div class="col-4 contentProduct">
                     <img src="images/prd4.jpg" alt="">
                     <div class="overlay">
-                        <input type="button" value="Thêm vào giỏ hàng" class="btn">
+                        <input type="button" value="Thêm vào giỏ hàng" onclick="add_to_cart(<%= prd.get(i).getProductID() %>,'<%= prd.get(i).getProductName() %>',<%= prd.get(i).getPrice() %>)" class="btn">
                     </div>
                     <h4><%= prd.get(i).getProductName() %></h4>
                     <div class="rating">
