@@ -137,69 +137,97 @@
             for (int i=0;i<prd.size();i++) {%>
             <div class="row">
                 <% if(i<prd.size()) {%>
-                <div class="col-4 contentProduct">
-                    <img src="images/prd4.jpg" alt="">
-                    <div class="overlay">
-                        <input type="button" value="Thêm vào giỏ hàng" onclick="add_to_cart(<%= prd.get(i).getProductID() %>,'<%= prd.get(i).getProductName() %>',<%= prd.get(i).getPrice() %>)" class="btn">
-                    </div>
-                    <h4><%= prd.get(i).getProductName() %></h4>
-                    <div class="rating">
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star-o" ></i>
-                    </div>
-                    <p><%= prd.get(i).getPrice() %></p>
-                </div> <% } i++;%> 
+                <form class="col-4 contentProduct" name="product" action="CartServlet" method="post">
+                    <div class="">
+                        <img src="images/prd4.jpg" alt="">
+                        <div class="overlay">
+                            <input type="submit" value="Thêm vào giỏ hàng" onclick="add_to_cart(<%= prd.get(i).getProductID() %>,'<%= prd.get(i).getProductName() %>',<%= prd.get(i).getPrice() %>)" class="btn">
+                        </div>
+
+                        <h4><%= prd.get(i).getProductName() %></h4>
+                        <div class="rating">
+                            <i class="fa fa-star" ></i>
+                            <i class="fa fa-star" ></i>
+                            <i class="fa fa-star" ></i>
+                            <i class="fa fa-star" ></i>
+                            <i class="fa fa-star-o" ></i>
+                        </div>
+                        <p><%= prd.get(i).getPrice() %></p>
+                        <input type="hidden" name="prdID_item" value="<%= prd.get(i).getProductID()%>"><!-- comment -->
+                        <input type="hidden" name="prdName_item" value="<%= prd.get(i).getProductName()%>"><!-- comment -->
+                        <input type="hidden" name="prdPrice_item" value="<%= prd.get(i).getPrice()%>"><!-- comment -->
+                        <input type="hidden" name="action" value="add">
+                    </div> 
+                </form><% } i++;%>
                 <% if(i<prd.size()) {%>
-                <div class="col-4 contentProduct">
-                    <img src="images/prd4.jpg" alt="">
-                    <div class="overlay">
-                        <input type="button" value="Thêm vào giỏ hàng" onclick="add_to_cart(<%= prd.get(i).getProductID() %>,'<%= prd.get(i).getProductName() %>',<%= prd.get(i).getPrice() %>)" class="btn">
-                    </div>
-                    <h4><%= prd.get(i).getProductName() %></h4>
-                    <div class="rating">
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star-o" ></i>
-                    </div>
-                    <p><%= prd.get(i).getPrice() %></p>
-                </div> <% } i++;%>  
+                <form class="col-4 contentProduct" name="product" action="CartServlet" method="post">
+                    <div class="">
+                        <img src="images/prd4.jpg" alt="">
+                        <div class="overlay">
+                            <input type="submit" value="Thêm vào giỏ hàng" onclick="add_to_cart(<%= prd.get(i).getProductID() %>,'<%= prd.get(i).getProductName() %>',<%= prd.get(i).getPrice() %>)" class="btn">
+                        </div>
+
+                        <h4><%= prd.get(i).getProductName() %></h4>
+                        <div class="rating">
+                            <i class="fa fa-star" ></i>
+                            <i class="fa fa-star" ></i>
+                            <i class="fa fa-star" ></i>
+                            <i class="fa fa-star" ></i>
+                            <i class="fa fa-star-o" ></i>
+                        </div>
+                        <p><%= prd.get(i).getPrice() %></p>
+                        <input type="hidden" name="prdID_item" value="<%= prd.get(i).getProductID()%>"><!-- comment -->
+                        <input type="hidden" name="prdName_item" value="<%= prd.get(i).getProductName()%>"><!-- comment -->
+                        <input type="hidden" name="prdPrice_item" value="<%= prd.get(i).getPrice()%>"><!-- comment -->
+                        <input type="hidden" name="action" value="add">
+                    </div> 
+                </form><% } i++;%>  
                 <% if(i<prd.size()) {%>
-                <div class="col-4 contentProduct">
-                    <img src="images/prd4.jpg" alt="">
-                    <div class="overlay">
-                        <input type="button" value="Thêm vào giỏ hàng" onclick="add_to_cart(<%= prd.get(i).getProductID() %>,'<%= prd.get(i).getProductName() %>',<%= prd.get(i).getPrice() %>)" class="btn">
-                    </div>
-                    <h4><%= prd.get(i).getProductName() %></h4>
-                    <div class="rating">
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star-o" ></i>
-                    </div>
-                    <p><%= prd.get(i).getPrice() %></p>
-                </div> <% } i++;%>  
+                <form class="col-4 contentProduct" name="product" action="CartServlet" method="post">
+                    <div class="">
+                        <img src="images/prd4.jpg" alt="">
+                        <div class="overlay">
+                            <input type="submit" value="Thêm vào giỏ hàng" onclick="add_to_cart(<%= prd.get(i).getProductID() %>,'<%= prd.get(i).getProductName() %>',<%= prd.get(i).getPrice() %>)" class="btn">
+                        </div>
+
+                        <h4><%= prd.get(i).getProductName() %></h4>
+                        <div class="rating">
+                            <i class="fa fa-star" ></i>
+                            <i class="fa fa-star" ></i>
+                            <i class="fa fa-star" ></i>
+                            <i class="fa fa-star" ></i>
+                            <i class="fa fa-star-o" ></i>
+                        </div>
+                        <p><%= prd.get(i).getPrice() %></p>
+                        <input type="hidden" name="prdID_item" value="<%= prd.get(i).getProductID()%>"><!-- comment -->
+                        <input type="hidden" name="prdName_item" value="<%= prd.get(i).getProductName()%>"><!-- comment -->
+                        <input type="hidden" name="prdPrice_item" value="<%= prd.get(i).getPrice()%>"><!-- comment -->
+                        <input type="hidden" name="action" value="add">
+                    </div> 
+                </form><% } i++;%>  
                 <% if(i<prd.size()) {%>
-                <div class="col-4 contentProduct">
-                    <img src="images/prd4.jpg" alt="">
-                    <div class="overlay">
-                        <input type="button" value="Thêm vào giỏ hàng" onclick="add_to_cart(<%= prd.get(i).getProductID() %>,'<%= prd.get(i).getProductName() %>',<%= prd.get(i).getPrice() %>)" class="btn">
-                    </div>
-                    <h4><%= prd.get(i).getProductName() %></h4>
-                    <div class="rating">
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star-o" ></i>
-                    </div>
-                    <p><%= prd.get(i).getPrice() %></p>
-                </div> <% } %>  
+                <form class="col-4 contentProduct" name="product" action="CartServlet" method="post">
+                    <div class="">
+                        <img src="images/prd4.jpg" alt="">
+                        <div class="overlay">
+                            <input type="submit" value="Thêm vào giỏ hàng" onclick="add_to_cart(<%= prd.get(i).getProductID() %>,'<%= prd.get(i).getProductName() %>',<%= prd.get(i).getPrice() %>)" class="btn">
+                        </div>
+
+                        <h4><%= prd.get(i).getProductName() %></h4>
+                        <div class="rating">
+                            <i class="fa fa-star" ></i>
+                            <i class="fa fa-star" ></i>
+                            <i class="fa fa-star" ></i>
+                            <i class="fa fa-star" ></i>
+                            <i class="fa fa-star-o" ></i>
+                        </div>
+                        <p><%= prd.get(i).getPrice() %></p>
+                        <input type="hidden" name="prdID_item" value="<%= prd.get(i).getProductID()%>"><!-- comment -->
+                        <input type="hidden" name="prdName_item" value="<%= prd.get(i).getProductName()%>"><!-- comment -->
+                        <input type="hidden" name="prdPrice_item" value="<%= prd.get(i).getPrice()%>"><!-- comment -->
+                        <input type="hidden" name="action" value="add">
+                    </div> 
+                </form><% } %> 
             </div>
         <% }
         }
