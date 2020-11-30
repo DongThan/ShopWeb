@@ -26,18 +26,25 @@ import java.sql.Statement;
 public class ConnectionDB {
     private static ConnectionDB instance;
     private Connection connection;
-    String driverClassName = "com.mysql.jdbc.Driver";
-    String url = "jdbc:mysql://localhost:3306/dbthuongmaidientu";
-    String user = "root";
-    String password = "kunpro2000@@";
-    private ConnectionDB() throws ClassNotFoundException  {
+    private String driverClassName = "com.mysql.jdbc.Driver";
+    private String url = "jdbc:mysql://localhost:3306/dbthuongmaidientu";
+    private String user = "root";
+    private String password = "kunpro2000@@";
+    
+    private ConnectionDB() {
         try {
                 Class.forName("com.mysql.jdbc.Driver").newInstance();
-                connection = DriverManager.getConnection(url, user , password);
+                this.connection = DriverManager.getConnection(url, user , password);
         }        
-        catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException e) 
+        catch ( ClassNotFoundException ex) 
         {
             System.out.println("Database Connection Creation Failed : " + ex.getMessage());
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
     public Connection getConnection(){
@@ -52,4 +59,5 @@ public class ConnectionDB {
         }
         return instance;
     }
+      
 }

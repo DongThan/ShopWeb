@@ -8,10 +8,6 @@
         <servlet-name>CartServlet</servlet-name>
         <servlet-class>Controller.CartServlet</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>AddtoCartServlet</servlet-name>
-        <servlet-class>Controller.AddtoCartServlet</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>
         <url-pattern>/Controller</url-pattern>

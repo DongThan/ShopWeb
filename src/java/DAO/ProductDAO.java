@@ -22,14 +22,13 @@ import java.util.List;
  * @author ASUS
  */
 public class ProductDAO {
-    private Connection getConnection() throws ClassNotFoundException  
-    {
-        Connection conn;
+    private static Connection getConnection() throws ClassNotFoundException, SQLException {
+        Connection con;
         ConnectionDB db=ConnectionDB.getInstance();
-        conn = db.getConnection();
-        return conn;
+        con = db.getConnection();
+        return con;
     }
-    public ArrayList<Product> getAllproduct() throws ClassNotFoundException
+    public ArrayList<Product> getAllproduct()
     {
         ArrayList<Product> prd = new ArrayList<>();
         
@@ -52,27 +51,25 @@ public class ProductDAO {
                 String date=rs.getString("DateAdded");
                 Product A = new Product(id,name,des,price,quantity,category,picture,date);
                 System.out.println(A.toString());
+                //System.out.println(getProductByID(12).toString());
                 prd.add(A);
             }
             System.out.println(prd.size());
-            System.out.println(getProductByID(11).toString());
             System.out.println("Load success");
         }
-        catch( SQLException e){
+        catch(SQLException | ClassNotFoundException e){
             e.printStackTrace();
         }
         return prd;
     }
-    public Product getProductByID(int id) throws ClassNotFoundException{
-        
+    public static Product getProductByID(int id_search) throws ClassNotFoundException{
         Product prd = new Product();
-        
         try{
             ResultSet rs = null;
             Connection con=getConnection();
             PreparedStatement prestatement = null;
-            prestatement = connection.prepareStatement("SELECT * FROM product WHERE ProductID=?");
-            prestatement.setString(1,id);
+            prestatement = con.prepareStatement("SELECT * FROM product WHERE ProductID=?");
+            prestatement.setString(1, String.valueOf(id_search));
             rs= prestatement.executeQuery();
             while (rs.next())
             {   
@@ -85,18 +82,18 @@ public class ProductDAO {
                 String picture=rs.getString("Picture");
                 String date=rs.getString("DateAdded");
                 Product A = new Product(id,name,des,price,quantity,category,picture,date);
-                prd = A;
-                System.out.println(A.toString());
-                break;
+                
+                prd= A;
             }
             
         }
         catch( SQLException e){
             e.printStackTrace();
+            return null;
         }
         return prd;
     }
-    public int getCountProduct() throws ClassNotFoundException{
+    public int getCountProduct() throws ClassNotFoundException, SQLException {
         Connection con=getConnection();
         int count=0;
         try{
