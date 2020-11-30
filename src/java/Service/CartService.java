@@ -13,10 +13,10 @@ import java.util.List;
  * @author ASUS
  */
 public class CartService {
-    public int getCost(CartItem item){
+    public static int getCost(CartItem item){
         return item.getQuantity()*item.getPrice();
     }
-    public int getTotalCost(List<CartItem> cartItem){
+    public static int getTotalCost(List<CartItem> cartItem){
         int totalCost=0;
         for(int i=0;i<cartItem.size();i++)
         {

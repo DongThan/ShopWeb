@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="DAO.*" %>
 <%@page import="Entity.*" %>
+<%@page import="Service.*" %>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -15,6 +16,8 @@
 <%@page import="java.sql.SQLException" %>
 <%@page import="java.util.ArrayList" %>
 <%@page import="java.util.List" %>
+<%@page import="javax.servlet.http.HttpSession" %>
+<%@ page import="java.security.Provider" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +30,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="js/cart.js" type="text/javascript"></script>
 </head>
+<%
+    Cart cart = (Cart)session.getAttribute("cart");
+    List<CartItem> listItems = cart.getItems();
+%>
 <body>
     <div class="container">
         <div class="navbar">
@@ -59,68 +66,31 @@
                 <th>Quantity</th>
                 <th>SubTotal</th>
             </tr>
+            <%
+            for (int i=0;i<listItems.size();i++)
+            { %>
             <tr>
                 <td>
                     <div class="cart-info">
                         <img src="images/prd6.jpg" alt="">
                         <div>
-                            <p>Cam thảo sấy khô</p>
-                            <small>Price: 500.000</small>
+                            <p><%= listItems.get(i).getProductName()%></p>
+                            <small>Price: <%= listItems.get(i).getPrice()%></small>
                             <a href="">Remove</a>
                         </div>
                     </div>
                 </td>
-                <td><input type="number" value="1"></td>
-                <td>500.000</td>
+                <td><input type="number" value="<%= listItems.get(i).getQuantity() %>"></td>
+                <td><%= CartService.getCost(listItems.get(i))  %></td>
             </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="images/prd6.jpg" alt="">
-                        <div>
-                            <p>Cam thảo sấy khô</p>
-                            <small>Price: 500.000</small>
-                            <a href="">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1"></td>
-                <td>500.000</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="images/prd6.jpg" alt="">
-                        <div>
-                            <p>Cam thảo sấy khô</p>
-                            <small>Price: 500.000</small>
-                            <a href="">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1"></td>
-                <td>500.000</td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="images/prd6.jpg" alt="">
-                        <div>
-                            <p>Cam thảo sấy khô</p>
-                            <small>Price: 500.000</small>
-                            <a href="">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="1"></td>
-                <td>500.000</td>
-            </tr>
+            <% } %>
+
         </table>
         <div class="total-price">
             <table>
                 <tr>
                     <td>Subtotal</td>
-                    <td>500.000</td>
+                    <td><%= CartService.getTotalCost(listItems)%></td>
                 </tr>
                 <tr>
                     <td>Tax</td>

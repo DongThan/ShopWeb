@@ -16,6 +16,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.servlet.ServletConfig;
 
 /**
  *
@@ -38,6 +40,7 @@ public class CartServlet extends HttpServlet {
         try {
             String strAction = request.getParameter("action");
             if (strAction != null && !strAction.equals("")) {
+                // Xu li them vao gio hang
                 if (strAction.equals("add")) {
                     int quantity = 1;
                     int id;
@@ -83,16 +86,14 @@ public class CartServlet extends HttpServlet {
 
                             }
                         }
-                        response.sendRedirect(request.getContextPath() + "/product.jsp");
                     }
-                    response.sendRedirect(request.getContextPath() + "/product.jsp");
                 }
+                // Xu li khac
             }
+            response.sendRedirect(request.getContextPath() + "/products.jsp");
         } catch (NumberFormatException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        } 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
