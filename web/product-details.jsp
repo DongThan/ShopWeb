@@ -61,7 +61,7 @@
                 <p>Home / Dược liệu</p>
                 <h1><%= prd.getProductName() %></h1>
                 <h4><%= prd.getPrice() %> Đồng/kg</h4>
-                <input class="input" type="number" name="prdQuantity_item" value="1">
+                <input  type="number" name="prdQuantity_item" value="1">
                 <select>
                     <option value="">Đơn vị</option>
                     <option value="">Kg</option>

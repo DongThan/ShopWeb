@@ -67,6 +67,7 @@ public class ProductDAO {
         try{
             ResultSet rs = null;
             Connection con=getConnection();
+            System.out.println("Load one product");
             PreparedStatement prestatement = null;
             prestatement = con.prepareStatement("SELECT * FROM product WHERE ProductID=?");
             prestatement.setString(1, String.valueOf(id_search));
@@ -82,9 +83,10 @@ public class ProductDAO {
                 String picture=rs.getString("Picture");
                 String date=rs.getString("DateAdded");
                 Product A = new Product(id,name,des,price,quantity,category,picture,date);
-                
+                System.out.println(A.toString());
                 prd= A;
             }
+            System.out.println("Load success");
             
         }
         catch( SQLException e){

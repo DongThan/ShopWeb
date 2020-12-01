@@ -30,10 +30,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="js/cart.js" type="text/javascript"></script>
 </head>
-<%
-    Cart cart = (Cart)session.getAttribute("cart");
-    List<CartItem> listItems = cart.getItems();
-%>
 <body>
     <div class="container">
         <div class="navbar">
@@ -60,30 +56,41 @@
     </script>
     <!------- cart item ------>
     <div class="small-container cart-page">
+        <%
+            if(session.getAttribute("cart")==null) {
+        %>
+            <h4>Không có sản phẩm nào trong giỏ hàng!!!</h4>
+        <% } %>
+        <%
+        if (session.getAttribute("cart")!=null){
+        %>
         <table class='tbl-cart-item'>
             <tr>
                 <th>Product</th>
                 <th>Quantity</th>
                 <th>SubTotal</th>
             </tr>
-            <%
-            for (int i=0;i<listItems.size();i++)
-            { %>
-            <tr>
-                <td>
-                    <div class="cart-info">
-                        <img src="images/prd6.jpg" alt="">
-                        <div>
-                            <p><%= listItems.get(i).getProductName()%></p>
-                            <small>Price: <%= listItems.get(i).getPrice()%></small>
-                            <a href="">Remove</a>
-                        </div>
-                    </div>
-                </td>
-                <td><input type="number" value="<%= listItems.get(i).getQuantity() %>"></td>
-                <td><%= CartService.getCost(listItems.get(i))  %></td>
-            </tr>
-            <% } %>
+            <% 
+                
+                Cart cart = (Cart)session.getAttribute("cart");
+                List<CartItem> listItems = cart.getItems();     
+                for (int i=0;i<listItems.size();i++)
+                    { %>
+                    <tr>
+                        <td>
+                            <div class="cart-info">
+                                <img src="images/prd6.jpg" alt="">
+                                <div>
+                                    <p><%= listItems.get(i).getProductName()%></p>
+                                    <small>Price: <%= listItems.get(i).getPrice()%></small>
+                                    <a href="">Remove</a>
+                                </div>
+                            </div>
+                        </td>
+                        <td><input type="number" value="<%= listItems.get(i).getQuantity() %>"></td>
+                        <td><%= CartService.getCost(listItems.get(i))  %></td>
+                    </tr>
+            <%}%>
 
         </table>
         <div class="total-price">
@@ -98,13 +105,14 @@
                 </tr>
                 <tr>
                     <td>Total</td>
-                    <td>450.000</td>
+                    <td><%= CartService.getTotalCost(listItems)%></td>
                 </tr>
             </table>
         </div>
-        <div class="row">
-            <a href="" class="btn btn-tt">Thanh toán</a> 
-        </div>
+        <form class="row">
+            <a href="" class="btn btn-tt">Thanh toán</a>
+        </form>
+        <% } %>
     </div>
 
     <!--------- footer  --------->
