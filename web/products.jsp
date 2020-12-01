@@ -33,7 +33,7 @@
     
     <script type="text/javascript">
         $(document).ready(function(){
-            
+            updateCart();
             var pageSize = 12;// 12 product in page
             showPage = function(page){
                 $(".col-4.contentProduct").hide();
@@ -137,13 +137,9 @@
             for (int i=0;i<prd.size();i++) {%>
             <div class="row">
                 <% if(i<prd.size()) {%>
-                <form class="col-4 contentProduct" name="product" action="CartServlet" method="post">
-                    <div class="">
+                <form class="col-4 contentProduct" name="product"  action="CartServlet" method="post">
+                    <div class="" onclick="ReDirect()">
                         <img src="images/prd4.jpg" alt="">
-                        <div class="overlay">
-                            <input type="submit" value="Thêm vào giỏ hàng" onclick="add_to_cart(<%= prd.get(i).getProductID() %>,'<%= prd.get(i).getProductName() %>',<%= prd.get(i).getPrice() %>)" class="btn">
-                        </div>
-
                         <h4><%= prd.get(i).getProductName() %></h4>
                         <div class="rating">
                             <i class="fa fa-star" ></i>
@@ -158,15 +154,14 @@
                         <input type="hidden" name="prdPrice_item" value="<%= prd.get(i).getPrice()%>"><!-- comment -->
                         <input type="hidden" name="action" value="add">
                     </div> 
+                    <div class="overlay">
+                        <input type="submit" value="Thêm vào giỏ hàng" onclick="add_to_cart(<%= prd.get(i).getProductID() %>,'<%= prd.get(i).getProductName() %>',<%= prd.get(i).getPrice() %>)" class="btn">
+                    </div>
                 </form><% } i++;%>
                 <% if(i<prd.size()) {%>
-                <form class="col-4 contentProduct" name="product" action="CartServlet" method="post">
-                    <div class="">
+                <form class="col-4 contentProduct" name="product"  action="CartServlet" method="post">
+                    <div class="" onclick="alert('Bạn đã click vào textbox');" >
                         <img src="images/prd4.jpg" alt="">
-                        <div class="overlay">
-                            <input type="submit" value="Thêm vào giỏ hàng" onclick="add_to_cart(<%= prd.get(i).getProductID() %>,'<%= prd.get(i).getProductName() %>',<%= prd.get(i).getPrice() %>)" class="btn">
-                        </div>
-
                         <h4><%= prd.get(i).getProductName() %></h4>
                         <div class="rating">
                             <i class="fa fa-star" ></i>
@@ -181,15 +176,14 @@
                         <input type="hidden" name="prdPrice_item" value="<%= prd.get(i).getPrice()%>"><!-- comment -->
                         <input type="hidden" name="action" value="add">
                     </div> 
+                    <div class="overlay">
+                        <input type="submit" value="Thêm vào giỏ hàng" onclick="add_to_cart(<%= prd.get(i).getProductID() %>,'<%= prd.get(i).getProductName() %>',<%= prd.get(i).getPrice() %>)" class="btn">
+                    </div>
                 </form><% } i++;%>  
                 <% if(i<prd.size()) {%>
-                <form class="col-4 contentProduct" name="product" action="CartServlet" method="post">
-                    <div class="">
+                <form class="col-4 contentProduct" name="product"  action="CartServlet" method="post">
+                    <div class="" onclick="alert('Bạn đã click vào textbox');" >
                         <img src="images/prd4.jpg" alt="">
-                        <div class="overlay">
-                            <input type="submit" value="Thêm vào giỏ hàng" onclick="add_to_cart(<%= prd.get(i).getProductID() %>,'<%= prd.get(i).getProductName() %>',<%= prd.get(i).getPrice() %>)" class="btn">
-                        </div>
-
                         <h4><%= prd.get(i).getProductName() %></h4>
                         <div class="rating">
                             <i class="fa fa-star" ></i>
@@ -204,15 +198,14 @@
                         <input type="hidden" name="prdPrice_item" value="<%= prd.get(i).getPrice()%>"><!-- comment -->
                         <input type="hidden" name="action" value="add">
                     </div> 
+                    <div class="overlay">
+                        <input type="submit" value="Thêm vào giỏ hàng" onclick="add_to_cart(<%= prd.get(i).getProductID() %>,'<%= prd.get(i).getProductName() %>',<%= prd.get(i).getPrice() %>)" class="btn">
+                    </div>
                 </form><% } i++;%>  
                 <% if(i<prd.size()) {%>
-                <form class="col-4 contentProduct" name="product" action="CartServlet" method="post">
-                    <div class="">
+                <form class="col-4 contentProduct" name="product"  action="CartServlet" method="post">
+                    <div class="" onclick="alert('Bạn đã click vào textbox');" >
                         <img src="images/prd4.jpg" alt="">
-                        <div class="overlay">
-                            <input type="submit" value="Thêm vào giỏ hàng" onclick="add_to_cart(<%= prd.get(i).getProductID() %>,'<%= prd.get(i).getProductName() %>',<%= prd.get(i).getPrice() %>)" class="btn">
-                        </div>
-
                         <h4><%= prd.get(i).getProductName() %></h4>
                         <div class="rating">
                             <i class="fa fa-star" ></i>
@@ -227,7 +220,10 @@
                         <input type="hidden" name="prdPrice_item" value="<%= prd.get(i).getPrice()%>"><!-- comment -->
                         <input type="hidden" name="action" value="add">
                     </div> 
-                </form><% } %> 
+                    <div class="overlay">
+                        <input type="submit" value="Thêm vào giỏ hàng" onclick="add_to_cart(<%= prd.get(i).getProductID() %>,'<%= prd.get(i).getProductName() %>',<%= prd.get(i).getPrice() %>)" class="btn">
+                    </div>
+                </form><% }%> 
             </div>
         <% }
         }

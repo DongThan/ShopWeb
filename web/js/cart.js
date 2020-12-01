@@ -68,4 +68,6 @@ function updateCart()
         table=table + ' </tabble> ';*/
     }
 }
-
+function ReDirect(){
+    window.replace("/product-detail.jsp");
+}
