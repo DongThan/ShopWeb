@@ -28,7 +28,7 @@ public class ProductDAO {
         con = db.getConnection();
         return con;
     }
-    public ArrayList<Product> getAllproduct()
+    public static ArrayList<Product> getAllproduct()
     {
         ArrayList<Product> prd = new ArrayList<>();
         
@@ -93,7 +93,7 @@ public class ProductDAO {
         }
         return prd;
     }
-    public int getCountProduct() throws ClassNotFoundException, SQLException {
+    public static int getCountProduct() throws ClassNotFoundException, SQLException {
         Connection con=getConnection();
         int count=0;
         try{

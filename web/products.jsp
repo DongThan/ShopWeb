@@ -26,10 +26,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="js/jquery.twbsPagination.js" type="text/javascript"></script>
     <script src="js/cart.js" type="text/javascript"></script>
-    <%
-    ProductDAO prdDAO=new ProductDAO();
-    int total = prdDAO.getCountProduct();
-    %>
     
     <script type="text/javascript">
         $(document).ready(function(){
@@ -115,7 +111,7 @@
         </div>
         
         <%
-        
+        int total = ProductDAO.getCountProduct();
         int first =0, last=0,pages=1;
         if(request.getParameter("pages")!=null)
         {
@@ -133,12 +129,12 @@
             last=12;
         }
         try{
-            List<Product> prd = prdDAO.getAllproduct();
+            List<Product> prd = ProductDAO.getAllproduct();
             for (int i=0;i<prd.size();i++) {%>
             <div class="row">
                 <% if(i<prd.size()) {%>
                 <form class="col-4 contentProduct" name="product"  action="CartServlet" method="post">
-                    <div class="" onclick="ReDirect()">
+                    <div class="" onclick="location.assign('product-details.jsp?prdID_item=<%= prd.get(i).getProductID() %>');">
                         <img src="images/prd4.jpg" alt="">
                         <h4><%= prd.get(i).getProductName() %></h4>
                         <div class="rating">
@@ -160,7 +156,7 @@
                 </form><% } i++;%>
                 <% if(i<prd.size()) {%>
                 <form class="col-4 contentProduct" name="product"  action="CartServlet" method="post">
-                    <div class="" onclick="alert('Bạn đã click vào textbox');" >
+                    <div class="" onclick="location.assign('product-details.jsp?prdID_item=<%= prd.get(i).getProductID() %>');">
                         <img src="images/prd4.jpg" alt="">
                         <h4><%= prd.get(i).getProductName() %></h4>
                         <div class="rating">
@@ -182,7 +178,7 @@
                 </form><% } i++;%>  
                 <% if(i<prd.size()) {%>
                 <form class="col-4 contentProduct" name="product"  action="CartServlet" method="post">
-                    <div class="" onclick="alert('Bạn đã click vào textbox');" >
+                    <div class="" onclick="location.assign('product-details.jsp?prdID_item=<%= prd.get(i).getProductID() %>');">
                         <img src="images/prd4.jpg" alt="">
                         <h4><%= prd.get(i).getProductName() %></h4>
                         <div class="rating">
@@ -204,7 +200,7 @@
                 </form><% } i++;%>  
                 <% if(i<prd.size()) {%>
                 <form class="col-4 contentProduct" name="product"  action="CartServlet" method="post">
-                    <div class="" onclick="alert('Bạn đã click vào textbox');" >
+                    <div class="" onclick="location.assign('product-details.jsp?prdID_item=<%= prd.get(i).getProductID() %>');">
                         <img src="images/prd4.jpg" alt="">
                         <h4><%= prd.get(i).getProductName() %></h4>
                         <div class="rating">

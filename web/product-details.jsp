@@ -1,4 +1,5 @@
-<%-- 
+<%@ page import="Entity.*" %>
+<%@ page import="DAO.*" %><%--
     Document   : product-details
     Created on : Nov 20, 2020, 8:58:55 PM
     Author     : ASUS
@@ -40,25 +41,42 @@
     </div>
     <!-- Single product details -->
     <div class="small-container single-product">
-        <div class="row">
+        <form class="row" name="product_detail" method="post" action="CartServlet">
+            <%
+                int ID;
+                if(request.getParameter("prdID_item")!=null)
+                {
+                    ID = Integer.parseInt(request.getParameter("prdID_item"));
+                }
+                else
+                {
+                    ID = 11;
+                }
+                Product prd = ProductDAO.getProductByID(ID);
+            %>
             <div class="col-2">
                 <img src="images/prd6.jpg" width="100%">
             </div>
             <div class="col-2">
                 <p>Home / Dược liệu</p>
-                <h1>Cam thảo sấy khô</h1>
-                <h4>500.000 Đồng/kg</h4>
-                <input type="number" value="1">
+                <h1><%= prd.getProductName() %></h1>
+                <h4><%= prd.getPrice() %> Đồng/kg</h4>
+                <input class="input" type="number" name="prdQuantity_item" value="1">
                 <select>
                     <option value="">Đơn vị</option>
                     <option value="">Kg</option>
                     <option value="">Tạ</option>
                 </select>
-                <a href="" class="btn">Thêm vào giỏ hàng</a>
+                <input type="hidden" name="prdID_item" value="<%= prd.getProductID()%>"><!-- comment -->
+                <input type="hidden" name="prdName_item" value="<%= prd.getProductName()%>"><!-- comment -->
+                <input type="hidden" name="prdPrice_item" value="<%= prd.getPrice()%>"><!-- comment -->
+                <input type="hidden" name="action" value="add">
+                <input type="submit" value="Thêm vào giỏ hàng" onclick="add_to_cart(<%= prd.getProductID() %>,'<%= prd.getProductName() %>',<%= prd.getPrice() %>)" class="btn">
                 <h3>Product Details <i class="fa fa-indent" ></i></h3>
-                <h4>Product Decription ở chỗ này nha. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellat nostrum neque doloribus placeat perferendis nemo molestiae dignissimos. Quaerat, architecto natus!</h4>
+                <h4><%= prd.getProductDescription() %> </h4>
+                
             </div>
-        </div>
+        </form>
     </div>
     <!------- view more ------>
     <div class="small-container">
